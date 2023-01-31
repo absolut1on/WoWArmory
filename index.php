@@ -26,7 +26,6 @@
         </div>
         <div class = "nav-margin">
             <ul class = "links">
-                a
     </header>
 	</body>
 </html>
