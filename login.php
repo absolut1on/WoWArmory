@@ -7,8 +7,7 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
 	<body>
-		<?php
-		?>
+		<a href = "./index.php"><figure class = "return-to-index">WoW</figure></a>
 		<div class="login">
 			<h1>Login</h1>
 			<form action="http://localhost:3000/authenticate.php" method="post">

@@ -76,6 +76,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="card">
+                    <a href = "./index.php"><figure class = "return-to-index">WoW</figure></a>
                         <div class="card-body">
                             <h5 class="card-title">Name :- <?php echo $_SESSION['name']?></h5>
                             <p class="card-text">Realm :- <?php echo $_SESSION['realm']?></p>

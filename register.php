@@ -8,6 +8,7 @@
 	<body>
 		<div class="register">
 			<h1>Register</h1>
+			<a href = "./index.php"><figure class = "return-to-index">WoW</figure></a>
 			<form action="http://localhost:3000/regToDB.php" method="post" autocomplete="off">
 				<label for="username">
 					<i class="fas fa-user"></i>

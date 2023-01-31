@@ -88,6 +88,7 @@
 	
 </head>
 <body>
+<a href = "./index.php"><figure class = "return-to-index">WoW</figure></a>
 <div id="guild-events" class="guild-events boxed" style="height:1080px">
 </br></br></br>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" style="margin-left:1%;">
