@@ -17,6 +17,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<link rel="stylesheet" href="style.css">
+<script  src="./script.js"></script>
+
 <script type="text/javascript" src="http://cdn.cavernoftime.com/api/tooltip.js"></script>
 <script>
 		var CoTTooltips = {
@@ -88,22 +92,55 @@
 	
 </head>
 <body>
-<div id="guild-events" class="guild-events boxed" style="height:1080px">
-</br></br></br>
-<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" style="margin-left:1%;">
-  <font color="white">Ingame name: </font> <input type="text" name="fname">
-  <font color="white">Realm: </font> <select name="realm">
-    <option value="Frostwolf">Frostwolf</option>
-    <option value="Outland">Outland</option>
-    <option value="Lordaeron">Lordaeron</option>
-	<option value="Icecrown">Icecrown</option>
-	<option value="Blackrock">Blackrock</option>
-</select>
-  <input type="submit">
-</form>
-</br>
-</br>
 
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'> -->
+
+<script  src="./scripts.js"></script>
+
+<div id="guild-events" class="guild-events boxed">
+<!-- <div>
+<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" style="margin-left:1%;">
+
+  <font color="black">Ingame name: </font> 
+
+
+  <div id="topnav" >
+	<select name="realm">
+    <option class="btn" value="Frostwolf">Frostwolf</option>
+    <option class="btn" value="Outland">Outland</option>
+    <option class="btn" value="Lordaeron">Lordaeron</option>
+	<option class="btn" value="Icecrown">Icecrown</option>
+	<option class="btn" value="Blackrock">Blackrock</option>
+	</select>
+  <input type="text" name="fname" placeholder="Search..">
+</div>
+
+  <input type="submit">
+</form> -->
+<form action='' class='form' method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" style="margin-left:1%;">
+  <p class='field required'>
+    <label class='label required' for='name'>Full name</label>
+    <input class='text-input' id='name' name='fname' required type='text' placeholder='Enter Username'>
+  </p>
+  <div class='field'>
+  <select name="realm" id="id_work_days" multiple>
+  <option value="Frostwolf">Frostwolf</option>
+  <option value="Outland">Outland</option>
+  <option value="Lordaeron">Lordaeron</option>
+  <option value="Icecrown">Icecrown</option>
+  <option value="Blackrock">Blackrock</option>
+</select>
+  </div>
+  <p class='field half'>
+    <input class='button' type='submit' value='Send'>
+  </p>
+</form>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.customSelect/0.5.1/jquery.customSelect.min.js'></script>
+<script src='https://codepen.io/mican/pen/XgRmNr.js'></script>
+
+</div>
 
 <?php
 //ignore warnings being set by warmane
@@ -130,7 +167,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
 		
 		echo "<div color='black'>Player ";
-		echo "<font color='black'>" .$name. "</font>"; 
+		echo "<font color='orange'>" .$name. "</font>"; 
 		echo "<font color='black'> is currently: </font>"; 
 		echo $minfo->online  > 0 ? "<font color='green'>Online</font>" : "<font color='red'>Offline</font>";
 		echo "</h1>";
@@ -223,7 +260,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$array_achi = explode("</br>", $array_achi);
 		
 
-		echo '<table id="achi" style="width:400px;position:absolute;margin-left:39%;margin-top:20%">';
+		echo '<table id="achi" style="width:400px;position:absolute;margin-left:38.5%;margin-top:21%">';
 		
 		echo '<thead>
 					<th>Recent Achievements</th>
