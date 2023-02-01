@@ -117,6 +117,7 @@
 
   <input type="submit">
 </form> -->
+<a href = "./index.php"><figure class = "return-to-index">WoW</figure></a>
 <form action='' class='form' method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" style="margin-left:1%;">
   <p class='field required'>
     <label class='label required' for='name'>Full name</label>
