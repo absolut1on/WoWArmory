@@ -17,8 +17,7 @@ body {
 .main-input-wrapper {
   background-color: black;
   padding: 1rem;
-  
-  outline-left: 1px solid red;
+  box-shadow: -5px 0px 0px 0px rgb(192, 41, 41), 5px 0px 0px 0px;
   outline-offset: 5px;
 }
 
