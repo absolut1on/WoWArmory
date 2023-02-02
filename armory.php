@@ -93,51 +93,57 @@
 </head>
 <body>
 
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'> -->
-
 <script  src="./scripts.js"></script>
 
 <div id="guild-events" class="guild-events boxed">
-<!-- <div>
-<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" style="margin-left:1%;">
 
-  <font color="black">Ingame name: </font> 
+<div style="display: flex; justify-content: space-between">
 
-
-  <div id="topnav" >
-	<select name="realm">
-    <option class="btn" value="Frostwolf">Frostwolf</option>
-    <option class="btn" value="Outland">Outland</option>
-    <option class="btn" value="Lordaeron">Lordaeron</option>
-	<option class="btn" value="Icecrown">Icecrown</option>
-	<option class="btn" value="Blackrock">Blackrock</option>
-	</select>
-  <input type="text" name="fname" placeholder="Search..">
-</div>
-
-  <input type="submit">
-</form> -->
-<a href = "./index.php"><figure class = "return-to-index">WoW</figure></a>
-<form action='' class='form' method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" style="margin-left:1%;">
-  <p class='field required'>
-    <label class='label required' for='name'>Full name</label>
-    <input class='text-input' id='name' name='fname' required type='text' placeholder='Enter Username'>
+<form action='' class='flex' method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" style="margin-left:1%;">
+  <div class='required flex-1'>
+	<div class="main-input-wrapper">
+	<input class='text-input main-input' id='name' name='fname' required type='text' placeholder='Enter Username'>
+	</div>
   </p>
-  <div class='field'>
+  <div class="options-wrapper">
   <select name="realm" id="id_work_days" multiple>
   <option value="Frostwolf">Frostwolf</option>
   <option value="Outland">Outland</option>
   <option value="Lordaeron">Lordaeron</option>
   <option value="Icecrown">Icecrown</option>
   <option value="Blackrock">Blackrock</option>
-</select>
+	</select>
   </div>
-  <p class='field half'>
+  <p class='half submit-button'>
     <input class='button' type='submit' value='Send'>
   </p>
 </form>
-<!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+	<?php
+		?>
+		<div class="login" style="display: flex;">
+			<h1>Login</h1>
+			<form action="http://localhost:3000/authenticate.php" method="post" class="login-form">
+				<label for="username">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="username" placeholder="Username" id="username" required>
+				<label for="password">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="password" name="password" placeholder="Password" id="password" required>
+				<font color="white">Realm: </font> <select name = "realm" id = "realm">
+					<option value="Frostwolf">Frostwolf</option>
+					<option value="Outland">Outland</option>
+					<option value="Lordaeron">Lordaeron</option>
+					<option value="Icecrown">Icecrown</option>
+					<option value="Blackrock">Blackrock</option>
+					</select>
+				<input type="submit" value="Login">
+			</form>
+			</div>
+	</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.customSelect/0.5.1/jquery.customSelect.min.js'></script>
 <script src='https://codepen.io/mican/pen/XgRmNr.js'></script>
 
@@ -178,12 +184,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo '<div>';			
 		echo '<table style="float: left;width:450px;margin-left:1%;">';
 		echo	'<thead>';
-		echo '<th>EQUIPMENT</th>';
+		echo '<th style="font-size: 22px; color: red;">EQUIPMENT</th>';
 		echo	'</thead>';
 		echo '<tbody>';
 			foreach($gmembers as $key => $value) {	
 				echo '<tr>';
-				echo '<td><a href="http://mop.cavernoftime.com/item=' . $value['item'] . '">' . $value['name'] . '</a></td>'; 
+				echo '<td style="margin: 0.5rem 0;display: block; color: lightred"><a href="http://mop.cavernoftime.com/item=' . $value['item'] . '">' . $value['name'] . '</a></td>'; 
 				echo '</tr>';
 			}
 		echo '</tbody>';			
@@ -203,8 +209,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 		echo	'<thead>
 					
-					<th colspan="3">' . $guild_name1 . ' members online</th>
-					<tr>
+					<th colspan="3" style="font-size: 22px; color: red;">' . $guild_name1 . ' members online</th>
+					<tr style="color: #a335ee!important; margin: 0.5rem 0;">
 						<th>Name</th>
 						<th>Race</th>
 						<th>Class</th>
@@ -213,7 +219,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					</tr>
 					
 				</thead>';
-		echo '<tbody>';
+		echo '<tbody class="special-table">';
 			foreach($members as $key => $value)
 			{
 				if($value['online'] > 0) {
@@ -264,7 +270,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo '<table id="achi" style="width:400px;position:absolute;margin-left:38.5%;margin-top:21%">';
 		
 		echo '<thead>
-					<th>Recent Achievements</th>
+					<th style="font-size: 22px; color: red;">Recent Achievements</th>
 				</thead>';
 		echo '<tbody>';
 	
@@ -279,7 +285,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
 		echo '</div>';
 
-		echo '<div style="position:absolute;margin-top:35%;margin-left:38.5%;color:black;width:600px;">';
+		echo '<div style="position:absolute;margin-top:35%;margin-left:38.5%;color:white;width:600px;">';
 		
 		$doc = new DOMDocument;
 		$doc->preserveWhiteSpace = true;
@@ -289,10 +295,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$xpath = new DOMXPath($doc);
 		$query = "//div[@class='character-stats']";
 		$entries = $xpath->query($query);
-		echo $entries->item(0)->textContent;
+	
+		$text = $entries->item(0)->textContent;
+		$textModified = substr($text, -2, 1);
+		$text5 = preg_split('/(?=[A-Z])/', $entries->item(0)->textContent);
+		$text6 = '';
+		$text6 = join(', ', $text5);
+		echo $text6;
 		echo '</div>';
-
-		
     } 
 }
 ?>
