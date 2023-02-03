@@ -36,6 +36,10 @@
 					<option value="Blackrock">Blackrock</option>
 					</select>
 				<button type="submit" value="Register">Create</button>
+				<p style="margin-top: 20px;">
+				<a  href="./armory.php">Back to Armory</a>
+				</p>
+				
     		</form>
   		</div>
 	</div>
