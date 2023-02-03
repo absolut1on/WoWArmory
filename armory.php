@@ -19,7 +19,6 @@
 <head>
 
 <link rel="stylesheet" href="style.css">
-<script  src="./script.js"></script>
 
 <script type="text/javascript" src="http://cdn.cavernoftime.com/api/tooltip.js"></script>
 <script>
@@ -115,13 +114,13 @@
 	</select>
   </div>
   <p class='half submit-button'>
-    <input class='button' type='submit' value='Send'>
+    <input  class='button' type='submit' value='Submit'>
   </p>
 </form>
-	<?php
-		?>
-		<div class="login" style="display: flex;">
-			<h1>Login</h1>
+
+	</div>
+
+	<div class="login" style="margin-right:1%;">
 			<form action="http://localhost:3000/authenticate.php" method="post" class="login-form">
 				<label for="username">
 					<i class="fas fa-user"></i>
@@ -131,17 +130,20 @@
 					<i class="fas fa-lock"></i>
 				</label>
 				<input type="password" name="password" placeholder="Password" id="password" required>
-				<font color="white">Realm: </font> <select name = "realm" id = "realm">
+					<select name = "realm" id = "realm">
+					<option value="Blackrock">Select Realm</option>
 					<option value="Frostwolf">Frostwolf</option>
 					<option value="Outland">Outland</option>
 					<option value="Lordaeron">Lordaeron</option>
 					<option value="Icecrown">Icecrown</option>
 					<option value="Blackrock">Blackrock</option>
 					</select>
-				<input type="submit" value="Login">
+				<input style="background: rgb(244, 67, 54); color: black;;" class="input_login" type="submit" value="Login">
 			</form>
+			<div style="margin-top:1%;">
+			<a href="./register.php"><p style="text-align:right">Not registered yet?</p></a>
 			</div>
-	</div>
+			</div>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.customSelect/0.5.1/jquery.customSelect.min.js'></script>
@@ -173,9 +175,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo "<h1 class='guild-box-title'>";
 		
 		
-		echo "<div color='black'>Player ";
+		echo "<div>";
+		echo "<font color='white'>Player </font>"; 
 		echo "<font color='orange'>" .$name. "</font>"; 
-		echo "<font color='black'> is currently: </font>"; 
+		echo "<font color='white'> is currently: </font>"; 
 		echo $minfo->online  > 0 ? "<font color='green'>Online</font>" : "<font color='red'>Offline</font>";
 		echo "</h1>";
 		
@@ -184,7 +187,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo '<div>';			
 		echo '<table style="float: left;width:450px;margin-left:1%;">';
 		echo	'<thead>';
-		echo '<th style="font-size: 22px; color: red;">EQUIPMENT</th>';
+		echo '<th style="font-size: 22px; color: red;">Equipment</th>';
 		echo	'</thead>';
 		echo '<tbody>';
 			foreach($gmembers as $key => $value) {	
@@ -194,6 +197,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			}
 		echo '</tbody>';			
 		echo '</table >';
+
+		echo '<div style="position:absolute;margin-left:24%;color:white;width:600px;">';
+		echo '<p style="font-size: 22px; color: red; font-weight:bold;">Character Stats</p>';
+		
+		$doc = new DOMDocument;
+		$doc->preserveWhiteSpace = true;
+		$doc->strictErrorChecking = false;
+		$doc->recover = true;
+		$doc->loadHTMLFile('http://armory.warmane.com/character/'. $name . '/' . $realm_s . '/summary');
+		$xpath = new DOMXPath($doc);
+		$query = "//div[@class='character-stats']";
+		$entries = $xpath->query($query);
+	
+		$text = $entries->item(0)->textContent;
+		$textModified = substr($text, 25);
+		$text5 = preg_split('/(?=[A-Z])/', $textModified);
+		$text6 = '';
+		$text6 = implode('<br> ', $text5);
+		echo '<div style="Color:grey;">'.$text6.'</div>';
+		echo '</div>';
+
 		sleep(4);
 		$guild_name = $minfo->guild;
 		$guild_name1 = $minfo->guild;
@@ -210,7 +234,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo	'<thead>
 					
 					<th colspan="3" style="font-size: 22px; color: red;">' . $guild_name1 . ' members online</th>
-					<tr style="color: #a335ee!important; margin: 0.5rem 0;">
+					<tr style="color: #a335ee!important; margin: 0.5rem 0; font-size: 16px;">
 						<th>Name</th>
 						<th>Race</th>
 						<th>Class</th>
@@ -223,7 +247,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			foreach($members as $key => $value)
 			{
 				if($value['online'] > 0) {
-				echo '<tr>';
+				echo '<tr style="color: grey!important; margin: 0.5rem 0; font-size: 16px;">';
 				echo '<td>' . $value['name'] . '</td>'; 
 				echo '<td>' . $value['race'] . '</td>';
 				echo '<td>' . $value['class'] . '</td>';
@@ -283,25 +307,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo '</tbody>';
 		echo '</table>';
 		
-		echo '</div>';
-
-		echo '<div style="position:absolute;margin-top:35%;margin-left:38.5%;color:white;width:600px;">';
-		
-		$doc = new DOMDocument;
-		$doc->preserveWhiteSpace = true;
-		$doc->strictErrorChecking = false;
-		$doc->recover = true;
-		$doc->loadHTMLFile('http://armory.warmane.com/character/'. $name . '/' . $realm_s . '/summary');
-		$xpath = new DOMXPath($doc);
-		$query = "//div[@class='character-stats']";
-		$entries = $xpath->query($query);
-	
-		$text = $entries->item(0)->textContent;
-		$textModified = substr($text, -2, 1);
-		$text5 = preg_split('/(?=[A-Z])/', $entries->item(0)->textContent);
-		$text6 = '';
-		$text6 = join(', ', $text5);
-		echo $text6;
 		echo '</div>';
     } 
 }
