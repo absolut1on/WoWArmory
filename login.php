@@ -4,14 +4,14 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Login</title>
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+	    <link rel="stylesheet" href="regStyle.css">
 	</head>
 	<body>
-		<a href = "./index.php"><figure class = "return-to-index">WoW</figure></a>
-		<div class="login">
-			<h1>Login</h1>
-			<form action="http://localhost:3000/authenticate.php" method="post">
-				<label for="username">
+	<div style="margin-top: 15%;" class="login-page">
+  		<div class="form">
+		  <h1>Log In</h1>
+    		<form class="login-form" action="http://localhost:3000/authenticate.php" method="post" autocomplete="off">
+			<label for="username">
 					<i class="fas fa-user"></i>
 				</label>
 				<input type="text" name="username" placeholder="Username" id="username" required>
@@ -19,15 +19,28 @@
 					<i class="fas fa-lock"></i>
 				</label>
 				<input type="password" name="password" placeholder="Password" id="password" required>
-				<font color="white">Realm: </font> <select name = "realm" id = "realm">
+
+				<label for="email">
+					<i class="fas fa-envelope"></i>
+				</label>
+				<select name = "realm" id = "realm">
+					<option value="null">Please Select Realm</option>
 					<option value="Frostwolf">Frostwolf</option>
 					<option value="Outland">Outland</option>
 					<option value="Lordaeron">Lordaeron</option>
 					<option value="Icecrown">Icecrown</option>
 					<option value="Blackrock">Blackrock</option>
 					</select>
-				<input type="submit" value="Login">
-			</form>
-			</div>
+				<button type="submit" value="Register">Login</button>
+				<p style="margin-top: 20px;">
+				<div class='no-acc'>
+                   <a href = "./register.php"> Don't have an Account? Sign up!</a>
+				</div>
+				</p>
+				
+    		</form>
+  		</div>
+	</div>
+
 	</body>
 </html>

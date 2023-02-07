@@ -39,7 +39,7 @@ if ($stmt = $con->prepare('SELECT id, realm, password FROM accounts WHERE userna
             $_SESSION['id'] = $id;
             $_SESSION['realm'] = $realm;
             $_SESSION['email'] = $_GET['email'];
-            header('Location: profile.php');
+            header('Location: armory.php');
         } else {
             // Incorrect password
             echo 'Incorrect username and/or password/realm!';

@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
+		<link rel="stylesheet" href="regStyle.css">
 		<meta charset="utf-8">
 		<title>Register</title>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+		
 	</head>
 	<body>
-		<div class="register">
-			<h1>Register</h1>
-			<a href = "./index.php"><figure class = "return-to-index">WoW</figure></a>
-			<form action="http://localhost:3000/regToDB.php" method="post" autocomplete="off">
-				<label for="username">
+
+	<div style="margin-top: 15%;" class="login-page">
+  		<div class="form">
+		  <h1>Register</h1>
+    		<form class="login-form" action="http://localhost:3000/regToDB.php" method="post" autocomplete="off">
+			<label for="username">
 					<i class="fas fa-user"></i>
 				</label>
 				<input type="text" name="username" placeholder="Username" id="username" required>
@@ -18,19 +21,30 @@
 					<i class="fas fa-lock"></i>
 				</label>
 				<input type="password" name="password" placeholder="Password" id="password" required>
+
 				<label for="email">
 					<i class="fas fa-envelope"></i>
 				</label>
 				<input type="email" name="email" placeholder="Email" id="email" required>
+
 				<select name = "realm" id = "realm">
+					<option value="null">Please Select Realm</option>
 					<option value="Frostwolf">Frostwolf</option>
 					<option value="Outland">Outland</option>
 					<option value="Lordaeron">Lordaeron</option>
 					<option value="Icecrown">Icecrown</option>
 					<option value="Blackrock">Blackrock</option>
 					</select>
-				<input type="submit" value="Register">
-			</form>
-		</div>
+				<button type="submit" value="Register">Create</button>
+				<p style="margin-top: 20px;">
+				<div class='logout'>
+                   <a href = "./login.php">Already have an account? Sign in!</a>
+				</div>
+				</p>
+				
+    		</form>
+  		</div>
+	</div>
+
 	</body>
 </html>

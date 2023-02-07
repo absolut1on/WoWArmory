@@ -1,5 +1,5 @@
 <?php 
-  //session_start(); 
+  session_start(); 
 
   /* IF YOU WANT TO CHECK IF A USR IS LOGGED IN
   if (!isset($_SESSION['username'])) {
@@ -17,6 +17,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<link rel="stylesheet" href="style.css">
+
 <script type="text/javascript" src="http://cdn.cavernoftime.com/api/tooltip.js"></script>
 <script>
 		var CoTTooltips = {
@@ -88,28 +91,56 @@
 	
 </head>
 <body>
-<a href = "./index.php"><figure class = "return-to-index">WoW</figure></a>
-<div id="guild-events" class="guild-events boxed" style="height:1080px">
-</br></br></br>
-<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" style="margin-left:1%;">
-  <font color="white">Ingame name: </font> <input type="text" name="fname">
-  <font color="white">Realm: </font> <select name="realm">
-    <option value="Frostwolf">Frostwolf</option>
-    <option value="Outland">Outland</option>
-    <option value="Lordaeron">Lordaeron</option>
-	<option value="Icecrown">Icecrown</option>
-	<option value="Blackrock">Blackrock</option>
-</select>
-  <input type="submit">
-</form>
-</br>
-</br>
 
+<script  src="./scripts.js"></script>
+
+<div id="guild-events" class="guild-events boxed">
+
+<div style="display: flex; justify-content: space-between">
+
+<form action='' class='flex' method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" style="margin-left:1%;">
+  <div class='required flex-1'>
+	<div class="main-input-wrapper">
+	<input class='text-input main-input' id='name' name='fname' required type='text' placeholder='Enter Username'>
+	<!-- pattern="/^([A-Za-z])*/" -->
+</div>
+  </p>
+  <div class="options-wrapper">
+  <select name="realm" id="id_work_days" multiple>
+  <option value="Frostwolf">Frostwolf</option>
+  <option value="Outland">Outland</option>
+  <option value="Lordaeron">Lordaeron</option>
+  <option value="Icecrown">Icecrown</option>
+  <option value="Blackrock">Blackrock</option>
+	</select>
+  </div>
+  <p class='half submit-button'>
+    <input  class='button' id = 'search_button' type='submit' value='Submit'>
+  </p>
+</form>
+
+	</div>
+
+		<div class="login" style="margin-right:1%;">
+				<h3 class='Hi'>
+					<font color = "white">Welcome to the Armory </font> <font color = "orange"><?php echo $_SESSION['name']?></font>
+				</h3>
+				<div class='logout' >
+                   <a href = "./logout.php" style = "margin-left:285px"> Log Out?</a>
+				</div>
+		</div>
+	</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.customSelect/0.5.1/jquery.customSelect.min.js'></script>
+<script src='https://codepen.io/mican/pen/XgRmNr.js'></script>
+<script src='scripts.js'></script>
+
+</div>
 
 <?php
 //ignore warnings being set by warmane
 error_reporting(0); 
-session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // collect value of input field
     $name = htmlspecialchars($_REQUEST['fname']); 
@@ -130,9 +161,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo "<h1 class='guild-box-title'>";
 		
 		
-		echo "<div color='black'>Player ";
-		echo "<font color='black'>" .$name. "</font>"; 
-		echo "<font color='black'> is currently: </font>"; 
+		echo "<div>";
+		echo "<font color='white'>Player </font>"; 
+		echo "<font color='orange'>" .$name. "</font>"; 
+		echo "<font color='white'> is currently: </font>"; 
 		echo $minfo->online  > 0 ? "<font color='green'>Online</font>" : "<font color='red'>Offline</font>";
 		echo "</h1>";
 		
@@ -141,16 +173,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo '<div>';			
 		echo '<table style="float: left;width:450px;margin-left:1%;">';
 		echo	'<thead>';
-		echo '<th>EQUIPMENT</th>';
+		echo '<th style="font-size: 22px; color: red;">Equipment</th>';
 		echo	'</thead>';
 		echo '<tbody>';
 			foreach($gmembers as $key => $value) {	
 				echo '<tr>';
-				echo '<td><a href="http://mop.cavernoftime.com/item=' . $value['item'] . '">' . $value['name'] . '</a></td>'; 
+				echo '<td style="margin: 0.5rem 0;display: block; color: lightred"><a href="http://mop.cavernoftime.com/item=' . $value['item'] . '">' . $value['name'] . '</a></td>'; 
 				echo '</tr>';
 			}
 		echo '</tbody>';			
 		echo '</table >';
+
+		echo '<div style="position:absolute;margin-left:24%;color:white;width:600px;">';
+		echo '<p style="font-size: 22px; color: red; font-weight:bold;">Character Stats</p>';
+		
+		$doc = new DOMDocument;
+		$doc->preserveWhiteSpace = true;
+		$doc->strictErrorChecking = false;
+		$doc->recover = true;
+		$doc->loadHTMLFile('http://armory.warmane.com/character/'. $name . '/' . $realm_s . '/summary');
+		$xpath = new DOMXPath($doc);
+		$query = "//div[@class='character-stats']";
+		$entries = $xpath->query($query);
+	
+		$text = $entries->item(0)->textContent;
+		$textModified = substr($text, 25);
+		$text5 = preg_split('/(?=[A-Z])/', $textModified);
+		$text6 = '';
+		$text6 = implode('<br> ', $text5);
+		echo '<div style="Color:grey;">'.$text6.'</div>';
+		echo '</div>';
+
 		sleep(4);
 		$guild_name = $minfo->guild;
 		$guild_name1 = $minfo->guild;
@@ -166,8 +219,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 		echo	'<thead>
 					
-					<th colspan="3">' . $guild_name1 . ' members online</th>
-					<tr>
+					<th colspan="3" style="font-size: 22px; color: red;">' . $guild_name1 . ' members online</th>
+					<tr style="color: #a335ee!important; margin: 0.5rem 0; font-size: 16px;">
 						<th>Name</th>
 						<th>Race</th>
 						<th>Class</th>
@@ -176,11 +229,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					</tr>
 					
 				</thead>';
-		echo '<tbody>';
+		echo '<tbody class="special-table">';
 			foreach($members as $key => $value)
 			{
 				if($value['online'] > 0) {
-				echo '<tr>';
+				echo '<tr style="color: grey!important; margin: 0.5rem 0; font-size: 16px;">';
 				echo '<td>' . $value['name'] . '</td>'; 
 				echo '<td>' . $value['race'] . '</td>';
 				echo '<td>' . $value['class'] . '</td>';
@@ -224,10 +277,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$array_achi = explode("</br>", $array_achi);
 		
 
-		echo '<table id="achi" style="width:400px;position:absolute;margin-left:39%;margin-top:20%">';
+		echo '<table id="achi" style="width:400px;position:absolute;margin-left:38.5%;margin-top:21%">';
 		
 		echo '<thead>
-					<th>Recent Achievements</th>
+					<th style="font-size: 22px; color: red;">Recent Achievements</th>
 				</thead>';
 		echo '<tbody>';
 	
@@ -241,21 +294,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo '</table>';
 		
 		echo '</div>';
-
-		echo '<div style="position:absolute;margin-top:35%;margin-left:38.5%;color:black;width:600px;">';
-		
-		$doc = new DOMDocument;
-		$doc->preserveWhiteSpace = true;
-		$doc->strictErrorChecking = false;
-		$doc->recover = true;
-		$doc->loadHTMLFile('http://armory.warmane.com/character/'. $name . '/' . $realm_s . '/summary');
-		$xpath = new DOMXPath($doc);
-		$query = "//div[@class='character-stats']";
-		$entries = $xpath->query($query);
-		echo $entries->item(0)->textContent;
-		echo '</div>';
-
-		
     } 
 }
 ?>
